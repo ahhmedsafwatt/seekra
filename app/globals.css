@@ -168,3 +168,8 @@
     @apply bg-background text-foreground;
   }
 }
+@layer utilities {
+  .container {
+    @apply mx-auto max-w-5xl! px-6 lg:px-8;
+  }
+}
