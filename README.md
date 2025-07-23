@@ -5,14 +5,17 @@ todo list
 - [x] create a logo
 - [x] create a nextjs project
 - [x] create a color pallette
-- [ ] create a landing page - optional
+- [x] create the container class
+- [ ] create a navigation bar
+- [ ] create a small hero section at the top of the secreen
+- [ ] create a footer
 - [ ] create a tool listing page
 - [ ] create a tool detail page
 - [ ] create a search page
 - [ ] create a user profile page
 - [ ] create a user settings page
 
-      **`Seekra`** is a tool to help you find the perfect AI Tool out there for your job without having to waist your time searching for them.
+**`Seekra`** is a tool to help you find the perfect AI Tool out there for your job without having to waist your time searching for them.
 
 1. key user problems
    - Information overload: Too many scattered, outdated sources.

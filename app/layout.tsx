@@ -4,6 +4,7 @@ import "./globals.css";
 import { Analytics } from "@vercel/analytics/next";
 import { Provider } from "@/lib/provider";
 import { defaultMetadata, openGraph, twitter } from "@/lib/shared-metadata";
+import Navbar from "@/components/ui/Navbar";
 
 const geist = Geist({ subsets: ["latin"] });
 
@@ -25,7 +26,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={geist.className + " dark"}>
-        <Provider>{children}</Provider>
+        <Provider>
+          <Navbar />
+          {children}
+        </Provider>
       </body>
     </html>
   );
