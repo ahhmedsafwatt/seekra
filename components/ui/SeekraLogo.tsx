@@ -1,15 +1,15 @@
-import React from "react";
+import React from 'react'
 
 interface SeekraLogoProps {
-  color?: string;
-  width?: number | string;
-  height?: number | string;
-  style?: React.CSSProperties;
-  className?: string;
+  color?: string
+  width?: number | string
+  height?: number | string
+  style?: React.CSSProperties
+  className?: string
 }
 
 const SeekraLogo: React.FC<SeekraLogoProps> = ({
-  color = "currentColor",
+  color = 'currentColor',
   width = 302,
   height = 69,
   style,
@@ -29,6 +29,6 @@ const SeekraLogo: React.FC<SeekraLogoProps> = ({
       fill={color}
     />
   </svg>
-);
+)
 
-export default SeekraLogo;
+export default SeekraLogo

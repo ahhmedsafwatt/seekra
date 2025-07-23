@@ -26,7 +26,6 @@ todo list
 ## Must-Have User-Facing Details
 
 - [ ] Homepage / Tool Listing
-
   - Tool name & branding
   - Brief description (1–2 lines)
   - Category / use case
