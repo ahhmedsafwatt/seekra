@@ -3,7 +3,7 @@ import { Geist, Space_Grotesk } from 'next/font/google'
 import './globals.css'
 import { Provider } from '@/lib/provider'
 import { defaultMetadata, openGraph, twitter } from '@/lib/shared-metadata'
-import Navbar from '@/components/ui/navbar'
+import { Navbar } from '@/components/navbar/navbar'
 
 const geist = Geist({ subsets: ['latin'] })
 const spaceGrotesk = Space_Grotesk({
