@@ -1,6 +1,6 @@
 'use client'
-import Logo from '@/components/ui/Logo'
-import SeekraLogo from '@/components/ui/SeekraLogo'
+import { Logo } from '@/components/icons/logo'
+import { SeekraLogo } from '@/components/icons/seekra-logo'
 
 export default function Home() {
   return (

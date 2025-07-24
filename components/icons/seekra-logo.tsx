@@ -8,13 +8,13 @@ interface SeekraLogoProps {
   className?: string
 }
 
-const SeekraLogo: React.FC<SeekraLogoProps> = ({
+export const SeekraLogo = ({
   color = 'currentColor',
   width = 302,
   height = 69,
   style,
   className,
-}) => (
+}: SeekraLogoProps) => (
   <svg
     width={width}
     height={height}
@@ -30,5 +30,3 @@ const SeekraLogo: React.FC<SeekraLogoProps> = ({
     />
   </svg>
 )
-
-export default SeekraLogo

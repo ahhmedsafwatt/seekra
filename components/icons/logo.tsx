@@ -5,7 +5,7 @@ interface LogoProps {
   fillColor?: string
 }
 
-const Logo: React.FC<LogoProps> = ({ size = 160, fillColor = 'white' }) => (
+export const Logo = ({ size = 160, fillColor = 'white' }: LogoProps) => (
   <svg
     width={size}
     height={size}
@@ -27,5 +27,3 @@ const Logo: React.FC<LogoProps> = ({ size = 160, fillColor = 'white' }) => (
     />
   </svg>
 )
-
-export default Logo

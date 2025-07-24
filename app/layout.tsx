@@ -1,12 +1,15 @@
 import type { Metadata } from 'next'
-import { Geist, Inter } from 'next/font/google'
+import { Geist, Space_Grotesk } from 'next/font/google'
 import './globals.css'
-import { Analytics } from '@vercel/analytics/next'
 import { Provider } from '@/lib/provider'
 import { defaultMetadata, openGraph, twitter } from '@/lib/shared-metadata'
-import Navbar from '@/components/ui/Navbar'
+import Navbar from '@/components/ui/navbar'
 
 const geist = Geist({ subsets: ['latin'] })
+const spaceGrotesk = Space_Grotesk({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+})
 
 export const metadata: Metadata = {
   ...defaultMetadata,
@@ -25,7 +28,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={geist.className + ' dark'}>
+      <body className={spaceGrotesk.className + geist.className + ' dark'}>
         <Provider>
           <Navbar />
           {children}

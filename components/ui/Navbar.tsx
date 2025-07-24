@@ -1,20 +1,30 @@
 'use client'
-import { useMemo, useState, useRef } from 'react'
-import SeekraLogo from './SeekraLogo'
-import Logo from './Logo'
-import { MenuIcon } from './menu-icon'
+import { useMemo, useState, useRef, ElementType, createElement } from 'react'
 import { Button } from './button'
-import { ChevronDownIcon, Search } from 'lucide-react'
 import { AnimatePresence, motion } from 'motion/react'
-import { SiBuymeacoffee } from 'react-icons/si'
 import Link from 'next/link'
 import { cn } from '@/lib/utils'
-import { IoMdArrowDropup } from 'react-icons/io'
+import { SiBuymeacoffee } from 'react-icons/si'
+import {
+  PixelChevronDown,
+  Chatbot,
+  Logo,
+  MenuIcon,
+  SearchIcon,
+  SeekraLogo,
+  AiAgnet,
+  ImageGaneration,
+  VideoGaneration,
+  AudioGaneration,
+} from '../icons/index'
 
 interface Navlinks {
   href?: string
   label: string
-  children?: (Navlinks & { icon?: React.ReactNode; description?: string })[]
+  children?: (Navlinks & {
+    icon?: ElementType
+    description?: string
+  })[]
 }
 
 const links: Navlinks[] = [
@@ -24,32 +34,42 @@ const links: Navlinks[] = [
       {
         href: '/chatbots',
         label: 'Chatbots',
-        icon: 'image',
+        icon: Chatbot,
+        description: 'Explore a variety of chatbots for different purposes.',
       },
       {
         href: '/ai-agents',
         label: 'AI Agents',
-        icon: 'robot',
+        icon: AiAgnet,
+        description: 'Discover AI agents that can perform tasks autonomously.',
       },
       {
         href: '/video-generators',
         label: 'Video Generators',
-        icon: 'video',
+        icon: VideoGaneration,
+        description: 'Explore a variety of video generation tools.',
       },
       {
         href: '/image-generators',
         label: 'Image Generators',
-        icon: 'image',
+        icon: ImageGaneration,
+        description: 'Explore a variety of image generation tools.',
       },
       {
         href: '/audio-generators',
         label: 'Audio Generators',
+        icon: AudioGaneration,
+        description: 'Discover tools for generating audio content.',
       },
     ],
   },
   {
     href: '/self-hosted',
     label: 'Self-hosted',
+  },
+  {
+    href: '/categories',
+    label: 'Categories',
   },
   {
     href: '/advertise',
@@ -102,15 +122,14 @@ const Navbar = () => {
     <header className="fixed top-0 z-50 w-full border-b">
       {/* Mobile menu icon */}
       <nav className="bg-background/60 container flex items-center justify-between py-2 backdrop-blur-md lg:rounded-sm">
-        <div className="flex items-center gap-4 lg:gap-8">
-          <Link
-            href="/"
-            className="group flex items-center gap-2 text-xl font-bold"
-          >
-            <Logo size={24} />
-            <SeekraLogo width={64} height={18} className="inline-block" />
-          </Link>
-        </div>
+        <Link
+          href="/"
+          className="group flex items-center gap-1.5 text-xl font-bold"
+        >
+          <Logo size={24} />
+          <SeekraLogo width={64} height={18} className="inline-block" />
+        </Link>
+
         <div
           ref={linksContainerRef}
           className="relative hidden gap-2.5 text-sm lg:flex"
@@ -163,7 +182,9 @@ const Navbar = () => {
               return (
                 <li
                   key={label}
-                  className={cn('relative z-10 p-2')}
+                  className={cn(
+                    'text-muted-foreground hover:text-secondary relative z-10 p-2',
+                  )}
                   onMouseEnter={(e) => {
                     setActiveDropdown(label)
                     handleMouseEnter(e)
@@ -172,53 +193,73 @@ const Navbar = () => {
                 >
                   <span
                     className={cn(
-                      'text-muted-foreground hover:text-secondary flex cursor-pointer items-center gap-1 transition-colors',
+                      'flex cursor-pointer items-center gap-1 transition-colors',
                     )}
                   >
                     {label}
-                    <ChevronDownIcon
-                      size={16}
-                      className={cn('transition-transform duration-200', {
-                        'rotate-180': activeDropdown === label,
-                      })}
+                    <PixelChevronDown
+                      fill="currentColor"
+                      className={cn(
+                        'size-4 origin-center transition-transform duration-200',
+                        {
+                          'rotate-180': activeDropdown === label,
+                        },
+                      )}
                     />
                   </span>
                   <AnimatePresence>
                     {activeDropdown === label && (
                       <motion.ul
-                        initial={{ opacity: 0, scale: 0.7 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        exit={{ opacity: 0, scale: 0.7 }}
+                        initial={{ opacity: 0, y: -24 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -24 }}
                         transition={{
-                          duration: 0.2,
-                          ease: [0.625, 0.05, 0, 1],
+                          type: 'tween',
+                          duration: 0.22,
+                          ease: 'easeOut',
                         }}
-                        className="absolute left-0 top-12 w-56 rounded-md border p-2 shadow-lg"
+                        className="bg-background absolute -left-1/2 top-10 flex -translate-x-1/4 flex-row gap-4 rounded-md border px-6 py-5 xl:-translate-x-1/3 xl:gap-6 xl:px-8 xl:py-6"
                       >
-                        <IoMdArrowDropup className="absolute left-[50%] top-0 size-9 h-8 w-full -translate-x-[50%] -translate-y-[60%]" />
-                        {children?.map(({ href, label, icon }) => (
+                        {children?.map(({ href, label, icon, description }) => (
                           <motion.li
                             key={href}
-                            className="py-1"
-                            initial={{ opacity: 0, x: 10 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            transition={{
-                              duration: 0.2,
-                              delay: 0.2,
-                              ease: [0.625, 0.05, 0, 1],
+                            initial={{
+                              opacity: 0.5,
+                              x: 20,
+                              filter: 'blur(12px)',
                             }}
+                            animate={{
+                              opacity: 1,
+                              x: 0,
+                              filter: 'blur(0px)',
+                            }}
+                            whileHover={{
+                              scale: 0.97,
+                              transition: {
+                                duration: 0.2,
+                                type: 'spring',
+
+                                stiffness: 230,
+                              },
+                            }}
+                            className="text-muted-foreground bg-accent group flex min-w-44 cursor-pointer flex-col items-center gap-12 rounded-md p-4 transition-colors duration-200 xl:min-w-56 xl:max-w-52 xl:p-5"
                           >
-                            <Link
-                              href={href ?? ''}
-                              className="group flex w-full items-center gap-2 rounded-md text-xs transition-colors duration-300"
-                            >
-                              <span className="rounded-md border p-[4px] transition-colors">
-                                <span className="transition-transform duration-300 group-hover:rotate-6 group-hover:scale-110">
-                                  {icon}
-                                </span>
+                            {icon
+                              ? createElement(icon, {
+                                  className:
+                                    'size-14 xl:size-18 group-hover:text-primary transition-colors duration-200 pt-4 box-content',
+                                  fill: 'currentColor',
+                                })
+                              : null}
+
+                            <div className="flex flex-col items-start space-y-1">
+                              <span className="text-foreground group-hover:text-primary font-serif text-sm font-bold leading-tight transition-colors duration-200 xl:text-base">
+                                {label}
                               </span>
-                              <span>{label}</span>
-                            </Link>
+                              <span className="text-xs font-medium leading-relaxed xl:text-sm">
+                                {description}
+                              </span>
+                            </div>
                           </motion.li>
                         ))}
                       </motion.ul>
@@ -229,11 +270,11 @@ const Navbar = () => {
             })}
           </ul>
         </div>
-        <div className="flex items-center gap-3">
-          <div className="flex items-center gap-1.5">
-            <Search
-              className="text-muted-foreground hover:bg-accent hover:text-secondary box-content cursor-pointer rounded-sm p-1.5 transition-colors duration-200"
-              size={18}
+        <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1">
+            <SearchIcon
+              fill="currentColor"
+              className="text-muted-foreground hover:bg-accent hover:text-secondary box-content size-5 cursor-pointer rounded-sm p-1.5 transition-colors duration-200"
             />
             <SiBuymeacoffee
               size={18}
@@ -242,7 +283,7 @@ const Navbar = () => {
             <Button
               asChild
               size="sm"
-              className="rounded-sm duration-200 ease-out hover:scale-95"
+              className="ml-1 rounded-sm duration-200 ease-out hover:scale-95"
             >
               <a href="/submit">Submit</a>
             </Button>
