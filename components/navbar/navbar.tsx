@@ -57,8 +57,17 @@ export const Navbar = () => {
   }, [])
 
   return (
-    <header className="fixed top-0 z-50 w-full border-b">
-      <nav className="bg-background/60 container flex items-center justify-between py-2 backdrop-blur-md lg:rounded-sm">
+    <header
+      className={cn(
+        'bg-background/60 fixed top-0 isolate z-50 w-full border-b backdrop-blur-md',
+        {
+          'border-none backdrop-blur-none': isMenuOpen,
+        },
+      )}
+    >
+      <nav
+        className={cn('container z-50 flex items-center justify-between py-2')}
+      >
         <LogoComponent />
 
         <div
