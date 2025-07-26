@@ -6,7 +6,7 @@ todo list
 - [x] create a nextjs project
 - [x] create a color pallette
 - [x] create the container class
-- [ ] create a navigation bar
+- [x] create a navigation bar
 - [ ] create a small hero section at the top of the secreen
 - [ ] create a footer
 - [ ] create a tool listing page

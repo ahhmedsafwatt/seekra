@@ -9,6 +9,7 @@ export const NAVBAR_ANIMATION_CONFIG = {
   dropdown: {
     initial: { opacity: 0, y: -24 },
     animate: { opacity: 1, y: 0 },
+    exit: { opacity: 0, y: -24 },
     transition: { type: 'tween', duration: 0.22, ease: 'easeOut' },
   },
   dropdownItem: {

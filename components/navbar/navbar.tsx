@@ -75,12 +75,11 @@ export const Navbar = () => {
           className="relative hidden gap-2.5 text-sm lg:flex"
           onMouseLeave={handleMouseLeave}
         >
-          {/* Animated highlight background */}
           <AnimatePresence>
             {highlightStyle.visible && (
               <motion.div
                 layout
-                className="bg-accent absolute z-0 rounded-sm"
+                className="bg-accent/80 absolute z-0 rounded-sm"
                 {...NAVBAR_ANIMATION_CONFIG.highlight}
                 style={{
                   left: highlightStyle.left,

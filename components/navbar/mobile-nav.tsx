@@ -55,7 +55,7 @@ export const MobileNav = ({ isOpen, onClose, links }: MobileNavProps) => {
                           <li key={child.href}>
                             <Link
                               href={child.href ? child.href : '#'}
-                              className="text-forground flex items-center gap-1.5 px-3 py-2 text-sm transition-colors duration-200"
+                              className="text-forground border-secondary/30 flex items-center gap-1.5 border-b border-dashed px-3 py-2 text-sm transition-colors duration-200"
                               onClick={onClose}
                             >
                               {createElement(child.icon!, {
