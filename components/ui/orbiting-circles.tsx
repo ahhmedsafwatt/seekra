@@ -1,6 +1,6 @@
 'use client'
 import { cn } from '@/lib/utils'
-import React, { useEffect, useState } from 'react'
+import React, { ElementType, useEffect, useState } from 'react'
 
 export interface OrbitingCirclesProps
   extends React.HTMLAttributes<HTMLDivElement> {
@@ -32,7 +32,7 @@ export function OrbitingCircles({
     if (typeof window === 'undefined') return baseRadius
     const width = window.innerWidth
     if (width < 640) {
-      return baseRadius * 0.6
+      return baseRadius * 0.5
     } else if (width < 768) {
       return baseRadius * 0.7
     } else if (width < 1024) {
@@ -44,9 +44,9 @@ export function OrbitingCircles({
     if (typeof window === 'undefined') return baseSize
     const width = window.innerWidth
     if (width < 640) {
-      return baseSize * 0.5
-    } else if (width < 768) {
       return baseSize * 0.6
+    } else if (width < 768) {
+      return baseSize * 0.7
     } else if (width < 1024) {
       return baseSize * 0.8
     }
@@ -75,7 +75,7 @@ export function OrbitingCircles({
     handleIconResize()
     handleResize()
     return () => window.removeEventListener('resize', handleResize)
-  }, [radius])
+  }, [iconSize, radius])
 
   return (
     <>
@@ -98,9 +98,12 @@ export function OrbitingCircles({
         const angle = (360 / React.Children.count(children)) * index
         let renderedIcon = child
         if (React.isValidElement(child)) {
-          renderedIcon = React.cloneElement(child as React.ReactElement<any>, {
-            size: responsiveIconSize,
-          })
+          renderedIcon = React.cloneElement(
+            child as React.ReactElement<ElementType & { size?: number }>,
+            {
+              size: responsiveIconSize,
+            },
+          )
         }
         return (
           <div
