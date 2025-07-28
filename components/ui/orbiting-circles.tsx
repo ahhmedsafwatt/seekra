@@ -28,8 +28,10 @@ export function OrbitingCircles({
 }: OrbitingCirclesProps) {
   const calculatedDuration = duration / speed
 
+  const [isMounted, setIsMounted] = useState(false)
+
   const getResponsiveRadius = (baseRadius: number) => {
-    if (typeof window === 'undefined') return baseRadius
+    if (!isMounted) return baseRadius
     const width = window.innerWidth
     if (width < 640) {
       return baseRadius * 0.5
@@ -41,7 +43,7 @@ export function OrbitingCircles({
     return baseRadius
   }
   const getResponsiveIconSize = (baseSize: number) => {
-    if (typeof window === 'undefined') return baseSize
+    if (!isMounted) return baseSize
     const width = window.innerWidth
     if (width < 640) {
       return baseSize * 0.6
@@ -53,14 +55,12 @@ export function OrbitingCircles({
     return baseSize
   }
 
-  const [responsiveRadius, setResponsiveRadius] = useState(() =>
-    getResponsiveRadius(radius),
-  )
-  const [responsiveIconSize, setresponsiveIconSize] = useState(() =>
-    getResponsiveIconSize(iconSize),
-  )
+  const [responsiveRadius, setResponsiveRadius] = useState(radius)
+  const [responsiveIconSize, setresponsiveIconSize] = useState(iconSize)
 
   useEffect(() => {
+    setIsMounted(true)
+
     function handleResize() {
       setResponsiveRadius(getResponsiveRadius(radius))
     }
@@ -75,7 +75,7 @@ export function OrbitingCircles({
     handleIconResize()
     handleResize()
     return () => window.removeEventListener('resize', handleResize)
-  }, [iconSize, radius])
+  }, [iconSize, radius, isMounted])
 
   return (
     <>
