@@ -24,7 +24,13 @@ import {
 export const Hero = () => {
   return (
     <main className="bg-background relative mb-12 mt-[52px] flex h-[calc(100vh-5rem)] w-full flex-col items-center justify-center overflow-clip border-b pt-12 antialiased">
-      <div className="absolute inset-0 z-10 flex h-full w-full flex-col items-center justify-center overflow-clip">
+      <div
+        style={{
+          maskImage:
+            'linear-gradient(to bottom,rgba(0,0,0,1) 0%,rgba(0,0,0,1) 40%,rgba(0,0,0,0.3) 60%,rgba(0,0,0,0.01) 75%,rgba(0,0,0,0) 100% )',
+        }}
+        className="absolute inset-0 z-10 flex h-full w-full flex-col items-center justify-center overflow-clip"
+      >
         <OrbitingCircles iconSize={48} radius={400} speed={0.5}>
           <OpenAI.Avatar size={48} />
           <Perplexity.Avatar size={48} />
@@ -58,8 +64,8 @@ export const Hero = () => {
           </span>
         </h1>
         <p className="text-muted-foreground mx-auto max-w-56 font-serif text-sm font-medium leading-relaxed sm:max-w-md sm:text-lg md:max-w-2xl lg:text-xl">
-          Seekra is your AI command center—built to guide creators, builders,
-          and teams to the exact tools they need to ship faster and smarter.
+          your AI command center—built to guide creators, builders, and teams to
+          the exact tools they need to ship faster and smarter.
         </p>
       </div>
     </main>

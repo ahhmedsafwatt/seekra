@@ -7,8 +7,8 @@ todo list
 - [x] create a color pallette
 - [x] create the container class
 - [x] create a navigation bar
-- [ ] create a small hero section at the top of the secreen
-- [ ] create a footer
+- [x] create a small hero section at the top of the secreen
+- [x] create a footer
 - [ ] create a tool listing page
 - [ ] create a tool detail page
 - [ ] create a search page

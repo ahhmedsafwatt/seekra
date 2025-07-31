@@ -79,7 +79,7 @@ export const Navbar = () => {
             {highlightStyle.visible && (
               <motion.div
                 layout
-                className="bg-accent/80 absolute z-0 rounded-sm"
+                className="bg-accent absolute z-0 rounded-sm"
                 {...NAVBAR_ANIMATION_CONFIG.highlight}
                 style={{
                   left: highlightStyle.left,
