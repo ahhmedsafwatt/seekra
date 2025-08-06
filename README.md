@@ -9,9 +9,9 @@ todo list
 - [x] create a navigation bar
 - [x] create a small hero section at the top of the secreen
 - [x] create a footer
+- [ ] create a search page
 - [ ] create a tool listing page
 - [ ] create a tool detail page
-- [ ] create a search page
 - [ ] create a user profile page
 - [ ] create a user settings page
 

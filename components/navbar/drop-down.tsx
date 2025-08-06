@@ -1,43 +1,49 @@
 import { AnimatePresence, motion } from 'motion/react'
 
-import { createElement } from 'react'
+import { createElement, forwardRef } from 'react'
 import Link from 'next/link'
 import { Navlinks } from '@/lib/utilities/types'
 import { NAVBAR_ANIMATION_CONFIG } from '@/lib/utilities/motion'
 
-export const DropdownMenu = ({
-  children,
-  isActive,
-}: {
-  children: Navlinks['children']
-  isActive: boolean
-}) => (
-  <AnimatePresence>
+export const DropdownMenu = forwardRef<
+  HTMLUListElement,
+  {
+    children: Navlinks['children']
+    isActive: boolean
+    onMouseLeave?: () => void
+  }
+>(({ children, isActive, onMouseLeave }, ref) => (
+  <>
     {isActive && (
       <motion.ul
+        ref={ref}
+        onMouseLeave={onMouseLeave}
         {...NAVBAR_ANIMATION_CONFIG.dropdown}
-        className="bg-background absolute -left-1/2 top-10 flex -translate-x-1/4 flex-row gap-4 rounded-md border px-6 py-5 xl:-translate-x-1/3 xl:gap-6 xl:px-8 xl:py-6"
+        className="bg-accent-foreground fixed -top-2 left-0 -z-10 flex w-full justify-center gap-4 rounded-b-md px-6 xl:gap-6 xl:px-8"
       >
         {children?.map(({ href, label, icon, description }) => (
           <motion.li
             key={href}
             {...NAVBAR_ANIMATION_CONFIG.dropdownItem}
-            className="text-muted-foreground bg-accent group flex min-w-44 cursor-pointer flex-col items-center gap-12 rounded-md p-4 transition-colors duration-200 xl:min-w-56 xl:max-w-52 xl:p-5"
+            className="text-muted-foreground bg-background group max-w-[11.5rem] cursor-pointer rounded-md px-3 py-5 transition-colors duration-200 xl:max-w-56"
           >
-            <Link href={href!} className="flex flex-col items-center gap-12">
+            <Link
+              href={href!}
+              className="flex h-full flex-col items-center justify-between gap-8"
+            >
               {icon
                 ? createElement(icon, {
                     className:
-                      'size-14 xl:size-18 group-hover:text-primary transition-colors duration-200 pt-4 box-content',
+                      'size-20 group-hover:text-primary transition-colors duration-200 mt-8 box-content',
                     fill: 'currentColor',
                   })
                 : null}
 
-              <div className="flex flex-col items-start space-y-1">
+              <div className="flex flex-col items-start space-y-1.5">
                 <span className="text-foreground group-hover:text-primary font-serif text-sm font-bold leading-tight transition-colors duration-200 xl:text-base">
                   {label}
                 </span>
-                <span className="text-xs font-medium leading-relaxed xl:text-sm">
+                <span className="group-hover:text-secondary text-xs font-medium leading-relaxed xl:text-sm">
                   {description}
                 </span>
               </div>
@@ -46,5 +52,5 @@ export const DropdownMenu = ({
         ))}
       </motion.ul>
     )}
-  </AnimatePresence>
-)
+  </>
+))

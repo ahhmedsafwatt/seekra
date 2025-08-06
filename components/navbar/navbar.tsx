@@ -44,7 +44,7 @@ export const Navbar = () => {
     setHighlightStyle((prev) => ({ ...prev, visible: false }))
   }, [])
 
-  const handleDropdownLeave = useCallback(() => {
+  const handleDropdownLeave = useCallback((e: React.MouseEvent) => {
     setActiveDropdown(null)
   }, [])
 
@@ -59,7 +59,7 @@ export const Navbar = () => {
   return (
     <header
       className={cn(
-        'bg-background/60 fixed top-0 isolate z-50 w-full border-b backdrop-blur-md',
+        'bg-background/60 fixed top-0 z-50 w-full border-b backdrop-blur-md',
         {
           'border-none backdrop-blur-none': isMenuOpen,
         },
@@ -68,18 +68,18 @@ export const Navbar = () => {
       <nav
         className={cn('container z-50 flex items-center justify-between py-2')}
       >
-        <LogoComponent />
+        <LogoComponent fillColor={!activeDropdown ? 'white' : 'black'} />
 
         <div
           ref={linksContainerRef}
-          className="relative hidden gap-2.5 text-sm lg:flex"
+          className="relative z-10 hidden gap-2.5 text-sm lg:flex"
           onMouseLeave={handleMouseLeave}
         >
           <AnimatePresence>
             {highlightStyle.visible && (
               <motion.div
                 layout
-                className="bg-accent absolute z-0 rounded-sm"
+                className="bg-accent absolute z-30 rounded-sm"
                 {...NAVBAR_ANIMATION_CONFIG.highlight}
                 style={{
                   left: highlightStyle.left,
@@ -92,13 +92,13 @@ export const Navbar = () => {
             )}
           </AnimatePresence>
           <ul className="hidden items-center gap-2 lg:flex">
-            {NAVIGATION_LINKS.map(({ href, label, children }: Navlinks) => {
+            {NAVIGATION_LINKS.map(({ href, label }: Navlinks) => {
               if (href) {
                 return (
                   <li
                     key={href}
                     className={cn(
-                      'text-muted-foreground hover:text-secondary z-10 p-2 transition-colors',
+                      'text-muted-foreground hover:text-secondary z-50 p-2 transition-colors',
                     )}
                     onMouseEnter={handleMouseEnter}
                   >
@@ -110,13 +110,13 @@ export const Navbar = () => {
                 <li
                   key={label}
                   className={cn(
-                    'text-muted-foreground hover:text-secondary relative z-10 p-2',
+                    'text-muted-foreground hover:text-secondary relative z-50 p-2',
                   )}
                   onMouseEnter={(e) => {
                     setActiveDropdown(label)
                     handleMouseEnter(e)
                   }}
-                  onMouseLeave={() => handleDropdownLeave()}
+                  onMouseLeave={(e) => handleDropdownLeave(e)}
                 >
                   <span
                     className={cn(
@@ -133,15 +133,24 @@ export const Navbar = () => {
                         },
                       )}
                     />
-                  </span>
-                  <DropdownMenu isActive={activeDropdown === label}>
-                    {children}
-                  </DropdownMenu>
+                  </span>{' '}
+                  <AnimatePresence>
+                    {activeDropdown && (
+                      <DropdownMenu isActive={!!activeDropdown}>
+                        {
+                          NAVIGATION_LINKS.find(
+                            (link) => link.label === activeDropdown,
+                          )?.children
+                        }
+                      </DropdownMenu>
+                    )}
+                  </AnimatePresence>
                 </li>
               )
             })}
           </ul>
         </div>
+
         <div className="flex items-center gap-2">
           <ActionButtons />
           <MenuIcon

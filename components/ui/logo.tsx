@@ -2,15 +2,34 @@ import Link from 'next/link'
 import { Logo as LogoIcon, SeekraLogo } from '../icons'
 import { cn } from '@/lib/utils'
 
-export const LogoComponent = ({ className }: { className?: string }) => (
+interface LogoProps {
+  className?: string
+  iconSize?: number
+  textHeight?: number
+  textWidth?: number
+  fillColor?: string
+}
+
+export const LogoComponent = ({
+  className,
+  iconSize = 24,
+  textHeight = 18,
+  textWidth = 64,
+  fillColor = 'currentColor',
+}: LogoProps) => (
   <Link
     href="/"
     className={cn(
-      'group flex items-center gap-1.5 text-xl font-bold',
+      'group z-50 flex items-center gap-1.5 text-xl font-bold',
       className,
     )}
   >
-    <LogoIcon size={24} />
-    <SeekraLogo width={64} height={18} className="inline-block" />
+    <LogoIcon size={iconSize} fillColor={fillColor} />
+    <SeekraLogo
+      width={textWidth}
+      height={textHeight}
+      fillColor={fillColor}
+      className="inline-block"
+    />
   </Link>
 )

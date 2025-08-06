@@ -91,8 +91,13 @@ export const Footer = () => {
               <h3 className="mb-4 font-serif font-bold">{section.title}</h3>
               <ul className="text-muted-foreground space-y-4">
                 {section.links.map((link, linkIdx) => (
-                  <li key={linkIdx} className="hover:text-primary">
-                    <Link href={link.url}>{link.text}</Link>
+                  <li key={linkIdx}>
+                    <Link
+                      className="hover:text-primary cursor-pointer"
+                      href={link.url}
+                    >
+                      {link.text}
+                    </Link>
                   </li>
                 ))}
               </ul>

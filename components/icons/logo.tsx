@@ -12,7 +12,7 @@ export const Logo = ({ size = 160, fillColor = 'white' }: LogoProps) => (
     viewBox="0 0 160 160"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
-    className="group"
+    className="group transition-all duration-75 ease-in"
   >
     <path
       fillRule="evenodd"
@@ -24,6 +24,7 @@ export const Logo = ({ size = 160, fillColor = 'white' }: LogoProps) => (
     <path
       d="M101.12 61.16C101.12 60.6077 100.672 60.16 100.12 60.16H61.16C60.6077 60.16 60.16 60.6077 60.16 61.16V100.12C60.16 100.672 60.6077 101.12 61.16 101.12H100.12C100.672 101.12 101.12 100.672 101.12 100.12V61.16Z"
       fill={fillColor}
+      className="transition-all duration-75 ease-in"
     />
   </svg>
 )
