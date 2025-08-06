@@ -78,7 +78,7 @@ const GlowingEffect = memo(
 
           const currentAngle =
             parseFloat(element.style.getPropertyValue('--start')) || 0
-          let targetAngle =
+          const targetAngle =
             (180 * Math.atan2(mouseY - center[1], mouseX - center[0])) /
               Math.PI +
             90
@@ -160,7 +160,7 @@ const GlowingEffect = memo(
             } as React.CSSProperties
           }
           className={cn(
-            'pointer-events-none absolute inset-0 z-50 rounded-[inherit] opacity-100 transition-opacity',
+            'pointer-events-none absolute inset-0 z-40 rounded-[inherit] opacity-100 transition-opacity',
             glow && 'opacity-100',
             blur > 0 && 'blur-[var(--blur)]',
             className,

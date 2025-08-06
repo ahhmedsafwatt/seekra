@@ -1,4 +1,4 @@
-import { AnimatePresence, motion } from 'motion/react'
+import { motion } from 'motion/react'
 
 import { createElement, forwardRef } from 'react'
 import Link from 'next/link'
@@ -54,3 +54,5 @@ export const DropdownMenu = forwardRef<
     )}
   </>
 ))
+
+DropdownMenu.displayName = 'DropdownMenu'

@@ -44,7 +44,7 @@ export const Navbar = () => {
     setHighlightStyle((prev) => ({ ...prev, visible: false }))
   }, [])
 
-  const handleDropdownLeave = useCallback((e: React.MouseEvent) => {
+  const handleDropdownLeave = useCallback(() => {
     setActiveDropdown(null)
   }, [])
 
@@ -65,14 +65,12 @@ export const Navbar = () => {
         },
       )}
     >
-      <nav
-        className={cn('container z-50 flex items-center justify-between py-2')}
-      >
+      <nav className={cn('container flex items-center justify-between py-2')}>
         <LogoComponent fillColor={!activeDropdown ? 'white' : 'black'} />
 
         <div
           ref={linksContainerRef}
-          className="relative z-10 hidden gap-2.5 text-sm lg:flex"
+          className="relative z-30 hidden gap-2.5 text-sm lg:flex"
           onMouseLeave={handleMouseLeave}
         >
           <AnimatePresence>
@@ -116,7 +114,7 @@ export const Navbar = () => {
                     setActiveDropdown(label)
                     handleMouseEnter(e)
                   }}
-                  onMouseLeave={(e) => handleDropdownLeave(e)}
+                  onMouseLeave={handleDropdownLeave}
                 >
                   <span
                     className={cn(

@@ -23,7 +23,7 @@ import {
 
 export const Hero = () => {
   return (
-    <main className="bg-background relative mb-12 mt-[52px] flex h-[calc(100vh-5rem)] w-full flex-col items-center justify-center overflow-clip border-b pt-12 antialiased">
+    <main className="bg-background relative mt-[52px] flex h-[calc(100vh-5rem)] w-full flex-col items-center justify-center overflow-clip border-b pt-12 antialiased">
       <div
         style={{
           maskImage:

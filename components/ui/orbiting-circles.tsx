@@ -1,6 +1,6 @@
 'use client'
 import { cn } from '@/lib/utils'
-import React, { ElementType, useEffect, useState } from 'react'
+import React, { ElementType, useCallback, useEffect, useState } from 'react'
 
 export interface OrbitingCirclesProps
   extends React.HTMLAttributes<HTMLDivElement> {
@@ -30,30 +30,36 @@ export function OrbitingCircles({
 
   const [isMounted, setIsMounted] = useState(false)
 
-  const getResponsiveRadius = (baseRadius: number) => {
-    if (!isMounted) return baseRadius
-    const width = window.innerWidth
-    if (width < 640) {
-      return baseRadius * 0.5
-    } else if (width < 768) {
-      return baseRadius * 0.7
-    } else if (width < 1024) {
-      return baseRadius * 0.8
-    }
-    return baseRadius
-  }
-  const getResponsiveIconSize = (baseSize: number) => {
-    if (!isMounted) return baseSize
-    const width = window.innerWidth
-    if (width < 640) {
-      return baseSize * 0.6
-    } else if (width < 768) {
-      return baseSize * 0.7
-    } else if (width < 1024) {
-      return baseSize * 0.8
-    }
-    return baseSize
-  }
+  const getResponsiveRadius = useCallback(
+    (baseRadius: number) => {
+      if (!isMounted) return baseRadius
+      const width = window.innerWidth
+      if (width < 640) {
+        return baseRadius * 0.5
+      } else if (width < 768) {
+        return baseRadius * 0.7
+      } else if (width < 1024) {
+        return baseRadius * 0.8
+      }
+      return baseRadius
+    },
+    [isMounted],
+  )
+  const getResponsiveIconSize = useCallback(
+    (baseSize: number) => {
+      if (!isMounted) return baseSize
+      const width = window.innerWidth
+      if (width < 640) {
+        return baseSize * 0.6
+      } else if (width < 768) {
+        return baseSize * 0.7
+      } else if (width < 1024) {
+        return baseSize * 0.8
+      }
+      return baseSize
+    },
+    [isMounted],
+  )
 
   const [responsiveRadius, setResponsiveRadius] = useState(radius)
   const [responsiveIconSize, setresponsiveIconSize] = useState(iconSize)
@@ -75,7 +81,7 @@ export function OrbitingCircles({
     handleIconResize()
     handleResize()
     return () => window.removeEventListener('resize', handleResize)
-  }, [iconSize, radius, isMounted])
+  }, [iconSize, radius, isMounted, getResponsiveRadius, getResponsiveIconSize])
 
   return (
     <>
