@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useMemo, useState, memo } from 'react'
+import { useEffect, useState, memo } from 'react'
 import { Label } from '../ui/label'
 import { Input } from '../ui/input'
 import { SearchIcon } from '../icons'

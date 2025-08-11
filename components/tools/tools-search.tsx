@@ -46,7 +46,7 @@ export function ToolsSearch() {
     <div className="container border-x border-dashed pt-12">
       <div className="flex gap-3">
         <SearchBar value={q} onChange={(v: string | null) => setQ(v)} />
-        <SortSelect value={sort} onChange={(v: string) => setSort(v as any)} />
+        <SortSelect value={sort} onChange={(v: any) => setSort(v)} />
       </div>
       <FiltersPanel
         open={open}
