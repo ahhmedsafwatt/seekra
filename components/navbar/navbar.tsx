@@ -96,7 +96,7 @@ export const Navbar = () => {
                   <li
                     key={href}
                     className={cn(
-                      'text-muted-foreground hover:text-secondary z-50 p-2 transition-colors',
+                      'text-muted-foreground hover:text-secondary-foreground z-50 p-2 transition-colors',
                     )}
                     onMouseEnter={handleMouseEnter}
                   >
@@ -108,7 +108,7 @@ export const Navbar = () => {
                 <li
                   key={label}
                   className={cn(
-                    'text-muted-foreground hover:text-secondary relative z-50 p-2',
+                    'text-muted-foreground hover:text-foreground relative z-50 p-2',
                   )}
                   onMouseEnter={(e) => {
                     setActiveDropdown(label)

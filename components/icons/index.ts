@@ -4,7 +4,7 @@ import { Logo } from './logo'
 import { MenuIcon } from './menu-icon'
 import { SearchIcon } from './search-icon'
 import { SeekraLogo } from './seekra-logo'
-import { AiAgnet } from './ai-agent'
+import { AiAgent } from './ai-agent'
 import { ImageGaneration } from './image-icon'
 import { VideoGaneration } from './video-icon'
 import { AudioGaneration } from './audio-icon'
@@ -16,7 +16,7 @@ export {
   MenuIcon,
   SearchIcon,
   SeekraLogo,
-  AiAgnet,
+  AiAgent,
   ImageGaneration,
   VideoGaneration,
   AudioGaneration,

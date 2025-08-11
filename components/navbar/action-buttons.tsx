@@ -8,7 +8,7 @@ export const ActionButtons = () => (
   <div className="z-50 flex items-center gap-1">
     <SearchIcon
       fill="currentColor"
-      className="text-muted-foreground hover:bg-accent hover:text-secondary box-content size-5 cursor-pointer rounded-sm p-1.5 transition-colors duration-200"
+      className="hover:bg-accent hover:text-foreground cursor-pointer rounded-sm transition-colors duration-200"
     />
 
     <Tooltip>
@@ -20,12 +20,12 @@ export const ActionButtons = () => (
         >
           <SiBuymeacoffee
             size={18}
-            className="text-muted-foreground hover:bg-accent hover:text-secondary box-content cursor-pointer rounded-sm p-1.5 transition-colors duration-200"
+            className="text-muted-foreground hover:bg-accent hover:text-foreground box-content cursor-pointer rounded-sm p-1.5 transition-colors duration-200"
           />
         </Link>
       </TooltipTrigger>
       <TooltipContent>
-        <p>buy me a coffee</p>
+        <p>buy me a coffee, pretty please {`<3`}</p>
       </TooltipContent>
     </Tooltip>
     <Button

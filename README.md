@@ -10,10 +10,8 @@ todo list
 - [x] create a small hero section at the top of the secreen
 - [x] create a footer
 - [ ] create a search page
-- [ ] create a tool listing page
+- [=] create a tool listing page
 - [ ] create a tool detail page
-- [ ] create a user profile page
-- [ ] create a user settings page
 
 **`Seekra`** is a tool to help you find the perfect AI Tool out there for your job without having to waist your time searching for them.
 

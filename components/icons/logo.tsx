@@ -1,18 +1,29 @@
+import { cn } from '@/lib/utils'
 import React from 'react'
+import type { SVGProps } from 'react'
 
-interface LogoProps {
+interface LogoProps extends Omit<SVGProps<SVGSVGElement>, 'width' | 'height'> {
   size?: number | string
   fillColor?: string
 }
 
-export const Logo = ({ size = 160, fillColor = 'white' }: LogoProps) => (
+export const Logo = ({
+  size = 160,
+  fillColor = 'currentColor',
+  className,
+  ...props
+}: LogoProps) => (
   <svg
-    width={size}
-    height={size}
+    xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 160 160"
     fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-    className="group transition-all duration-75 ease-in"
+    className={cn(
+      'group transition-all duration-75 ease-in',
+      className
+    )}
+    width={size}
+    height={size}
+    {...props}
   >
     <path
       fillRule="evenodd"

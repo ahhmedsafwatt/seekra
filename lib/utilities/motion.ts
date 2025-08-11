@@ -13,7 +13,7 @@ export const NAVBAR_ANIMATION_CONFIG = {
       padding: '5rem 0 1.5rem',
       transition: {
         duration: 0.3,
-      },
+      } as const,
     },
     exit: {
       height: 0,
@@ -21,7 +21,7 @@ export const NAVBAR_ANIMATION_CONFIG = {
       transition: {
         when: 'afterChildren',
         duration: 0.3,
-      },
+      } as const,
     },
   },
   dropdownItem: {
@@ -31,18 +31,65 @@ export const NAVBAR_ANIMATION_CONFIG = {
       x: 0,
       transition: {
         delay: 0.3,
-      },
+      } as const,
     },
     exit: {
       opacity: 0,
       transition: {
         duration: 0,
         delay: 0,
-      },
+      } as const,
     },
     whileHover: {
       scale: 0.97,
-      transition: { duration: 0.2, type: 'spring', stiffness: 230 },
+      transition: { duration: 0.2, type: 'spring', stiffness: 230 } as const,
+    },
+  },
+} as const
+
+export const FILTER_ANIMATION_CONFIG = {
+  container: ({ open }: { open: boolean }) => ({
+    initial: {
+      width: '5rem',
+      overflow: 'hidden',
+    },
+    animate: open
+      ? {
+          width: '100%',
+          overflow: 'visible',
+          transition: {
+            duration: 0.25,
+            type: 'spring',
+            stiffness: 300,
+            damping: 30,
+          } as const,
+        }
+      : {
+          width: '5.25rem',
+          overflow: 'hidden',
+          transition: {
+            duration: 0.25,
+            type: 'spring',
+            stiffness: 300,
+            damping: 30,
+          } as const,
+        },
+  }),
+  content: {
+    initial: { height: 0, opacity: 0 },
+    animate: {
+      height: 'auto',
+      opacity: 1,
+      transition: {
+        duration: 0.2,
+      } as const,
+    },
+    exit: {
+      height: 0,
+      opacity: 0,
+      transition: {
+        duration: 0.2,
+      } as const,
     },
   },
 } as const

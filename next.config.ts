@@ -1,7 +1,15 @@
-import type { NextConfig } from 'next'
+import bundleAnalyzer from '@next/bundle-analyzer'
+import { NextConfig } from 'next'
 
+const withBundleAnalyzer = bundleAnalyzer({
+  enabled: process.env.ANALYZE === 'true',
+})
+
+/** @type {import('next').NextConfig} */
 const nextConfig: NextConfig = {
-  /* config options here */
+  experimental: {
+    optimizePackageImports: ['@lobehub/icons'],
+    ppr: true,
+  },
 }
-
-export default nextConfig
+export default withBundleAnalyzer(nextConfig)

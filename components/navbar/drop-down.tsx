@@ -43,7 +43,7 @@ export const DropdownMenu = forwardRef<
                 <span className="text-foreground group-hover:text-primary font-serif text-sm font-bold leading-tight transition-colors duration-200 xl:text-base">
                   {label}
                 </span>
-                <span className="group-hover:text-secondary text-xs font-medium leading-relaxed xl:text-sm">
+                <span className="group-hover:text-secondary-foreground text-xs font-medium leading-relaxed xl:text-sm">
                   {description}
                 </span>
               </div>

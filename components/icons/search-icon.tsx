@@ -1,13 +1,16 @@
+import { cn } from '@/lib/utils'
 import React from 'react'
 import type { SVGProps } from 'react'
 
-export function SearchIcon(props: SVGProps<SVGSVGElement>) {
+export function SearchIcon({ className, ...props }: SVGProps<SVGSVGElement>) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width={props.width}
-      height={props.height}
       viewBox="0 0 24 24"
+      className={cn(
+        'text-muted-foreground box-content size-5 p-1.5',
+        className,
+      )}
       {...props}
     >
       <path

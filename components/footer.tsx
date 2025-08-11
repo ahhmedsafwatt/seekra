@@ -74,7 +74,7 @@ export const Footer = () => {
   ]
 
   return (
-    <footer className="border-t py-20">
+    <footer className="border-t border-dashed py-20">
       <div className="container">
         <div className="grid grid-cols-2 gap-8 lg:grid-cols-5">
           <div className="col-span-2 mb-8 lg:mb-0">
@@ -136,7 +136,7 @@ export const Footer = () => {
             </div>
           </div>
         </div>
-        <div className="text-muted-foreground mt-24 flex text-wrap border-t pt-6 font-serif text-sm font-medium md:items-end">
+        <div className="text-muted-foreground mt-24 flex text-wrap border-t border-dashed pt-6 font-serif text-sm font-medium md:items-end">
           Made by
           <Link
             href={'https://ahmed-safwat-portfolio-swart.vercel.app/'}

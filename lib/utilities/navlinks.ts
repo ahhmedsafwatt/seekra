@@ -1,6 +1,6 @@
 import {
   Chatbot,
-  AiAgnet,
+  AiAgent,
   ImageGaneration,
   VideoGaneration,
   AudioGaneration,
@@ -20,7 +20,7 @@ export const NAVIGATION_LINKS: Navlinks[] = [
       {
         href: '/ai-agents',
         label: 'AI Agents',
-        icon: AiAgnet,
+        icon: AiAgent,
         description: 'Discover AI agents that can perform tasks autonomously.',
       },
       {
