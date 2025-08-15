@@ -8,14 +8,14 @@ export const experimental_ppr = true
 export default async function Home({
   searchParams,
 }: {
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
+  searchParams: Promise<Record<string, string | string[]>>
 }) {
-  console.log('Rendering Home with searchParams:', await searchParams)
+  const params = await searchParams
   return (
     <>
       <Hero />
       <ToolsSearch />
-      <ToolsWrapper searchParams={searchParams} />
+      <ToolsWrapper searchParams={params} />
       <Footer />
     </>
   )

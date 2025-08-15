@@ -4,11 +4,13 @@ import './globals.css'
 import { Provider } from '@/lib/provider'
 import { defaultMetadata, openGraph, twitter } from '@/lib/shared-metadata'
 import { Navbar } from '@/components/navbar/navbar'
+import { cn } from '@/lib/utils'
 
-const geist = Geist({ subsets: ['latin'] })
+const geist = Geist({ subsets: ['latin'], variable: '--font-sans' })
 const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
   weight: ['400', '500', '600', '700'],
+  variable: '--font-serif',
 })
 
 export const metadata: Metadata = {
@@ -27,8 +29,11 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
-      <body className={spaceGrotesk.className + geist.className + ' dark'}>
+    <html
+      lang="en"
+      className={cn(` ${geist.variable} ${spaceGrotesk.variable} dark`)}
+    >
+      <body className={cn(`${geist.className} `)}>
         <Provider>
           <Navbar />
           {children}

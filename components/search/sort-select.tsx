@@ -8,7 +8,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '../ui/select'
-import { SORT_OPTIONS } from '@/lib/utilities/filter-constant'
+import { SORT_OPTIONS } from '@/lib/constants/filter-constant'
 
 interface SortSelectProps {
   value: string

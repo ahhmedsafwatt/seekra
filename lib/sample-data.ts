@@ -92,7 +92,7 @@ export const sampleTools: AITool[] = [
       'Internal communications',
     ],
     alternatives: ['2', '3'],
-    lastUpdated: '2024-10-15T00:00:00.000Z',
+    lastUpdated: '2024-10-15T00:00:00.000',
     tags: ['video', 'avatars', 'multilingual', 'enterprise'],
   },
   {
@@ -163,7 +163,7 @@ export const sampleTools: AITool[] = [
     cons: ['No image generation', 'Limited availability'],
     useCases: ['Code generation', 'Content writing', 'Research assistance'],
     alternatives: ['3'],
-    lastUpdated: '2024-10-20T00:00:00.000Z',
+    lastUpdated: '2024-10-20T00:00:00.000',
     tags: ['chatbot', 'coding', 'writing', 'research'],
   },
   {

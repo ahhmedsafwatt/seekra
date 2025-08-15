@@ -3,7 +3,7 @@ import { motion } from 'motion/react'
 import { createElement, forwardRef } from 'react'
 import Link from 'next/link'
 import { Navlinks } from '@/lib/utilities/types'
-import { NAVBAR_ANIMATION_CONFIG } from '@/lib/utilities/motion'
+import { NAVBAR_ANIMATION_CONFIG } from '@/lib/constants/motion'
 
 export const DropdownMenu = forwardRef<
   HTMLUListElement,
@@ -19,7 +19,7 @@ export const DropdownMenu = forwardRef<
         ref={ref}
         onMouseLeave={onMouseLeave}
         {...NAVBAR_ANIMATION_CONFIG.dropdown}
-        className="bg-accent-foreground fixed -top-2 left-0 -z-10 flex w-full justify-center gap-4 rounded-b-md px-6 xl:gap-6 xl:px-8"
+        className="bg-muted fixed -top-2 left-0 -z-10 flex w-full justify-center gap-4 rounded-b-md px-6 xl:gap-6 xl:px-8"
       >
         {children?.map(({ href, label, icon, description }) => (
           <motion.li

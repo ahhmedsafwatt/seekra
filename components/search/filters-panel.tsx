@@ -7,9 +7,9 @@ import { Label } from '../ui/label'
 import { ScrollArea } from '../ui/scroll-area'
 import { Separator } from '../ui/separator'
 import { PixelChevronDown } from '../icons'
-import { FILTER_ANIMATION_CONFIG } from '@/lib/utilities/motion'
-import { CATEGORIES, PRICING_OPTIONS } from '@/lib/utilities/filter-constant'
-import { cn } from '@/lib/utils'
+import { FILTER_ANIMATION_CONFIG } from '@/lib/constants/motion'
+import { CATEGORIES, PRICING_OPTIONS } from '@/lib/constants/filter-constant'
+import { cn, toggleInArrayOrNull } from '@/lib/utils'
 import { AnimatePresence, motion } from 'motion/react'
 
 interface FiltersPanelProps {
@@ -40,24 +40,15 @@ function FiltersPanelImpl({
 
   const filteredCategoryOptions = useMemo(
     () =>
-      CATEGORIES.filter((cat) =>
-        cat.toLowerCase().includes(categoryQuery.trim().toLowerCase()),
+      CATEGORIES.filter(
+        (cat) =>
+          cat.label
+            .toLowerCase()
+            .includes(categoryQuery.trim().toLowerCase()) ||
+          cat.value.toLowerCase().includes(categoryQuery.trim().toLowerCase()),
       ),
     [categoryQuery],
   )
-
-  const toggleArrayValue = (
-    value: string,
-    current: string[],
-    setter: (v: string[] | null) => void,
-  ) => {
-    if (current.includes(value)) {
-      const next = current.filter((v) => v !== value)
-      setter(next.length ? next : null)
-    } else {
-      setter([...current, value])
-    }
-  }
 
   return (
     <motion.div
@@ -111,11 +102,12 @@ function FiltersPanelImpl({
                 <ScrollArea className="h-48">
                   <ul className="space-y-1 p-3">
                     {filteredCategoryOptions.map((cat) => {
-                      const checked = categories.includes(cat)
-                      const checkboxId = `cat-${toDomId(cat)}`
+                      const checked = categories.includes(cat.value)
+                      const checkboxId = `cat-${toDomId(cat.value)}`
                       return (
-                        <li key={cat}>
-                          <div
+                        <li key={cat.value}>
+                          <Label
+                            htmlFor={checkboxId}
                             className={cn(
                               'hover:bg-muted flex items-center gap-2 rounded-md px-2 py-1.5',
                               { 'bg-muted/50': checked },
@@ -125,17 +117,13 @@ function FiltersPanelImpl({
                               id={checkboxId}
                               checked={checked}
                               onCheckedChange={() =>
-                                toggleArrayValue(
-                                  cat,
-                                  categories,
-                                  onCategoriesChange,
+                                onCategoriesChange(
+                                  toggleInArrayOrNull(categories, cat.value),
                                 )
                               }
                             />
-                            <Label htmlFor={checkboxId} className="text-sm">
-                              {cat}
-                            </Label>
-                          </div>
+                            {cat.label}
+                          </Label>
                         </li>
                       )
                     })}
@@ -155,11 +143,12 @@ function FiltersPanelImpl({
                 <Separator />
                 <ul className="space-y-1 p-3">
                   {PRICING_OPTIONS.map((p) => {
-                    const checked = pricing.includes(p)
-                    const checkboxId = `price-${toDomId(p)}`
+                    const checked = pricing.includes(p.value)
+                    const checkboxId = `price-${toDomId(p.value)}`
                     return (
-                      <li key={p}>
-                        <div
+                      <li key={p.value}>
+                        <Label
+                          htmlFor={checkboxId}
                           className={cn(
                             'hover:bg-muted flex items-center gap-2 rounded-md px-2 py-1.5',
                             { 'bg-muted/50': checked },
@@ -169,13 +158,13 @@ function FiltersPanelImpl({
                             id={checkboxId}
                             checked={checked}
                             onCheckedChange={() =>
-                              toggleArrayValue(p, pricing, onPricingChange)
+                              onPricingChange(
+                                toggleInArrayOrNull(pricing, p.value),
+                              )
                             }
                           />
-                          <Label htmlFor={checkboxId} className="text-sm">
-                            {p}
-                          </Label>
-                        </div>
+                          {p.label}
+                        </Label>
                       </li>
                     )
                   })}

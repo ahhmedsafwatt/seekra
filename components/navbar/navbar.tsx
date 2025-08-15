@@ -8,8 +8,8 @@ import { MobileNav } from '@/components/navbar/mobile-nav'
 import { LogoComponent } from '../ui/logo'
 import { DropdownMenu } from './drop-down'
 import { ActionButtons } from './action-buttons'
-import { NAVBAR_ANIMATION_CONFIG } from '@/lib/utilities/motion'
-import { NAVIGATION_LINKS } from '@/lib/utilities/navlinks'
+import { NAVBAR_ANIMATION_CONFIG } from '@/lib/constants/motion'
+import { NAVIGATION_LINKS } from '@/lib/constants/navlinks'
 import { Navlinks } from '@/lib/utilities/types'
 
 export const Navbar = () => {
@@ -66,7 +66,7 @@ export const Navbar = () => {
       )}
     >
       <nav className={cn('container flex items-center justify-between py-2')}>
-        <LogoComponent fillColor={!activeDropdown ? 'white' : 'black'} />
+        <LogoComponent />
 
         <div
           ref={linksContainerRef}

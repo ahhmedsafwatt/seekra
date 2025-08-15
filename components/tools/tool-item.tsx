@@ -1,26 +1,63 @@
 'use client'
-import { useSpotlight } from '@/hooks/useSpotlight'
-import { Spotlight } from '../ui/spotlight'
-import { GlowingEffect } from '../ui/glow-effect'
-import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
-import { ExternalLink, Star, Github, Calendar } from 'lucide-react'
-import { Button } from '../ui/button'
-import { Badge } from '../ui/badge'
+import { Star, Zap, Shield, Globe, Code, Sparkles } from 'lucide-react'
+import { Badge } from '@/components/ui/badge'
 import type { AITool } from '@/lib/utilities/types'
-
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card'
+import { Spotlight } from '@/components/ui/spotlight'
+import { GlowingEffect } from '@/components/ui/glow-effect'
+import { useSpotlight } from '@/hooks/useSpotlight'
+import { Tooltip, TooltipContent, TooltipTrigger } from '../ui/tooltip'
+import { formatDistanceToNow } from 'date-fns'
+import Image from 'next/image'
 interface ToolItemProps {
   tool: AITool
+}
+
+const getFeatureIcon = (feature: string) => {
+  const lowerFeature = feature.toLowerCase()
+  if (lowerFeature.includes('api')) return <Code className="h-4 w-4" />
+  if (lowerFeature.includes('security') || lowerFeature.includes('safe'))
+    return <Shield className="h-4 w-4" />
+  if (lowerFeature.includes('ai') || lowerFeature.includes('smart'))
+    return <Sparkles className="h-4 w-4" />
+  if (lowerFeature.includes('web') || lowerFeature.includes('online'))
+    return <Globe className="h-4 w-4" />
+  return <Zap className="h-4 w-4" />
+}
+
+const formatNumber = (num?: number) => {
+  if (!num) return '0'
+  if (num >= 1000000) return `${(num / 1000000).toFixed(1)}M`
+  if (num >= 1000) return `${(num / 1000).toFixed(1)}K`
+  return num.toString()
+}
+
+const formatPricing = (tool: AITool) => {
+  if (tool.pricing.toLowerCase() === 'free') return 'Free'
+  if (tool.pricing.toLowerCase() === 'open-source') return 'Open Source'
+  if (tool.pricing.toLowerCase() === 'paid' && tool.startingPrice !== 0) {
+    return `Paid $${tool.startingPrice}/mo`
+  }
+  return tool.pricing
+}
+
+export function timeAgo(dateString: string) {
+  return formatDistanceToNow(new Date(dateString), { addSuffix: true })
 }
 
 export function ToolItem({ tool }: ToolItemProps) {
   const { mouseX, mouseY, containerProps } = useSpotlight()
 
-  const githubStars = tool.stats.githubStars
-  const lastUpdatedDate = new Date(tool.lastUpdated).toISOString().slice(0, 10)
-
   return (
     <Card
-      className="ring-secondary/40 ring-6 group relative flex cursor-pointer rounded-lg border ring-inset backdrop-blur-lg"
+      className="group relative flex cursor-pointer flex-col gap-3 rounded-lg border backdrop-blur-lg transition-all duration-300 hover:shadow-lg"
       {...containerProps}
       onClick={() => window.open(tool.affiliateUrl ?? tool.website, '_blank')}
     >
@@ -33,65 +70,95 @@ export function ToolItem({ tool }: ToolItemProps) {
       />
       <Spotlight raduis={200} mouseX={mouseX} mouseY={mouseY} />
 
-      <CardHeader className="pb-3">
-        <div className="flex items-start justify-between">
+      <CardHeader className="px-4">
+        <div className="flex flex-col items-start justify-between">
           <div className="flex items-center gap-3">
-            <div className="bg-primary/10 flex h-10 w-10 items-center justify-center rounded-lg">
-              <span className="text-primary font-semibold" aria-hidden>
-                {tool.logo || tool.name.charAt(0)}
-              </span>
+            <div className="bg-muted/50 flex size-12 items-center justify-center rounded-lg">
+              {tool.logo ? (
+                <Image
+                  src={tool.logo || '/placeholder.svg'}
+                  alt={`${tool.name} logo`}
+                  className="size-8 rounded object-cover"
+                />
+              ) : (
+                <div className="bg-primary/10 flex size-8 items-center justify-center rounded">
+                  <Sparkles className="text-primary h-4 w-4" />
+                </div>
+              )}
             </div>
-            <div>
-              <div className="flex items-center gap-2">
-                <CardTitle className="group-hover:text-primary text-lg transition-colors">
-                  {tool.name}
-                </CardTitle>
-              </div>
-              <Badge variant="secondary" className="mt-1">
+            <div className="min-w-0 flex-1">
+              <CardTitle className="truncate font-serif text-lg leading-tight">
+                {tool.name}
+              </CardTitle>
+              <CardDescription className="mt-1 text-xs">
                 {tool.category}
-              </Badge>
+              </CardDescription>
             </div>
           </div>
-          <ExternalLink className="text-muted-foreground h-4 w-4 opacity-0 transition-opacity group-hover:opacity-100" />
+          <div className="flex items-center gap-2 pt-3.5">
+            <Badge
+              variant="outline"
+              className="text-primary bg-accent text-xs font-medium"
+            >
+              {formatPricing(tool)}
+            </Badge>
+            {tool.hasApi && (
+              <Badge variant="outline" className="text-xs font-medium">
+                <Code className="mr-1 h-3 w-3" />
+                API
+              </Badge>
+            )}
+            {tool.stats.totalUsers && (
+              <div className="flex items-center gap-2">
+                <div className="flex items-center gap-1">
+                  <Star className="h-3 w-3 fill-yellow-400 text-yellow-400" />
+                  <span className="text-xs font-medium">
+                    {tool.stats.totalUsers.toString().slice(0, 1)}
+                  </span>
+                </div>
+                {tool.stats.totalUsers && (
+                  <span className="text-muted-foreground text-xs">
+                    ({formatNumber(tool.stats.totalUsers)} users)
+                  </span>
+                )}
+              </div>
+            )}
+          </div>
         </div>
       </CardHeader>
-      <CardContent>
-        <p className="text-muted-foreground mb-4 line-clamp-2 text-sm">
-          {tool.tagline || tool.description}
+
+      <CardContent className="pt-0! flex-1 space-y-3 px-4">
+        <p className="text-muted-foreground line-clamp-3 text-sm font-medium leading-relaxed antialiased">
+          {tool.description || 'No description available.'}
         </p>
-
-        <div className="text-muted-foreground mb-4 flex items-center gap-4 text-sm">
-          <div className="flex items-center gap-1">
-            <Star className="h-4 w-4 fill-yellow-500 text-yellow-500" />
-            <span>{tool.rating.toFixed(1)}</span>
-          </div>
-          {githubStars ? (
-            <div className="flex items-center gap-1">
-              <Github className="h-4 w-4" />
-              <span>{githubStars}</span>
-            </div>
-          ) : null}
-          <div className="flex items-center gap-1">
-            <Calendar className="h-4 w-4" />
-            <span>{lastUpdatedDate}</span>
-          </div>
-        </div>
-
-        <div className="flex items-center justify-between">
-          <Badge variant={tool.pricing === 'Free' ? 'default' : 'outline'}>
-            {tool.pricing}
-          </Badge>
-          <Button size="sm" variant="ghost" asChild>
-            <a
-              href={tool.affiliateUrl ?? tool.website}
-              target="_blank"
-              rel="noreferrer"
-            >
-              View Details
-            </a>
-          </Button>
-        </div>
       </CardContent>
+      <CardFooter className="pt-4! justify-between border-t px-4">
+        {tool.features && tool.features.length > 0 && (
+          <div>
+            <div className="flex flex-wrap gap-2">
+              {tool.features.slice(0, 4).map((feature) => (
+                <Tooltip key={feature.id}>
+                  <TooltipTrigger>
+                    <Badge className="flex items-center gap-1.5 rounded-full px-2 py-1 text-xs">
+                      {getFeatureIcon(feature.title)}
+                    </Badge>
+                  </TooltipTrigger>
+                  <TooltipContent>{feature.title}</TooltipContent>
+                </Tooltip>
+              ))}
+              {tool.features.length > 4 && (
+                <Badge variant="outline" className="text-xs">
+                  +{tool.features.length - 4} more
+                </Badge>
+              )}
+            </div>
+          </div>
+        )}
+
+        <span className="text-muted-foreground text-xs">
+          updated {timeAgo(tool.lastUpdated)}
+        </span>
+      </CardFooter>
     </Card>
   )
 }

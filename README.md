@@ -9,9 +9,11 @@ todo list
 - [x] create a navigation bar
 - [x] create a small hero section at the top of the secreen
 - [x] create a footer
-- [ ] create a search page
-- [=] create a tool listing page
-- [ ] create a tool detail page
+- [x] create a search ui
+- [=] create search functionality - needs a wroking database
+- [x] create a tool card component
+- [=] create a tool card listing page - need pagenation to be completed
+- [ ] create a tool card detail component
 
 **`Seekra`** is a tool to help you find the perfect AI Tool out there for your job without having to waist your time searching for them.
 

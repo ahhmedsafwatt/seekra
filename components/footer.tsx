@@ -140,7 +140,7 @@ export const Footer = () => {
           Made by
           <Link
             href={'https://ahmed-safwat-portfolio-swart.vercel.app/'}
-            className="text-secondary fontser ml-1 hover:underline"
+            className="text-primary ml-1 hover:underline"
             target="_blank"
             rel="noopener noreferrer"
           >

@@ -59,7 +59,7 @@
 .dark {
   --background: oklch(0.1684 0 0);
   --foreground: oklch(0.9851 0 0);
-  --card: oklch(0.1577 0.0056 39.3286);
+  --card: oklch(0.17 0.001 159);
   --card-foreground: oklch(0.9851 0 0);
   --popover: oklch(0.2686 0 0);
   --popover-foreground: oklch(0.9851 0 0);
@@ -178,6 +178,10 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+
+  ::selection {
+    @apply bg-primary text-white;
   }
 }
 @layer utilities {

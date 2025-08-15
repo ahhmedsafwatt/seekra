@@ -5,7 +5,7 @@ import {
   VideoGaneration,
   AudioGaneration,
 } from '@/components/icons/index'
-import { Navlinks } from './types'
+import { Navlinks } from '../utilities/types'
 
 export const NAVIGATION_LINKS: Navlinks[] = [
   {

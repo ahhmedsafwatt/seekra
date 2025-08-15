@@ -3,6 +3,7 @@ import { memo } from 'react'
 import { Button } from '../ui/button'
 import { X } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { CATEGORIES, PRICING_OPTIONS } from '@/lib/constants/filter-constant'
 
 interface FilterChipsProps {
   categories: string[]
@@ -19,6 +20,16 @@ function FilterChipsImpl({
   onRemovePricing,
   onClearAll,
 }: FilterChipsProps) {
+  const getCategoryLabel = (value: string) => {
+    const category = CATEGORIES.find((cat) => cat.value === value)
+    return category?.label || value
+  }
+
+  const getPricingLabel = (value: string) => {
+    const pricingOption = PRICING_OPTIONS.find((p) => p.value === value)
+    return pricingOption?.label || value
+  }
+
   return (
     <div className="mt-2 flex flex-wrap items-center gap-2">
       {categories.map((cat) => (
@@ -26,11 +37,11 @@ function FilterChipsImpl({
           key={cat}
           className="bg-muted text-muted-foreground flex items-center gap-1 rounded px-1.5 py-0.5 text-xs"
         >
-          {cat}
+          {getCategoryLabel(cat)}
           <button
             type="button"
-            aria-label={`Remove ${cat} filter`}
-            title={`Remove ${cat}`}
+            aria-label={`Remove ${getCategoryLabel(cat)} filter`}
+            title={`Remove ${getCategoryLabel(cat)}`}
             onClick={() => onRemoveCategory(cat)}
             className="inline-flex h-4 w-4 items-center justify-center"
           >
@@ -43,11 +54,11 @@ function FilterChipsImpl({
           key={price}
           className="bg-muted text-muted-foreground flex items-center gap-1 rounded px-1.5 py-0.5 text-xs"
         >
-          {price}
+          {getPricingLabel(price)}
           <button
             type="button"
-            aria-label={`Remove ${price} filter`}
-            title={`Remove ${price}`}
+            aria-label={`Remove ${getPricingLabel(price)} filter`}
+            title={`Remove ${getPricingLabel(price)}`}
             onClick={() => onRemovePricing(price)}
             className="inline-flex h-4 w-4 items-center justify-center"
           >
